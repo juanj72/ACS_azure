@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACS</title>
+
+    <link rel="icon" href="{% static 'img/icon2.png'%}">
+
+    <link rel="stylesheet" href="{% static 'css/estilos.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  
+
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body id="body">
+    
+    
+    <header>
+        <div class="icon__menu">
+            <i class="fas fa-bars" id="btn_open"></i>
+            
+        </div>
+        
+    </header>
+
+    <div class="menu__side" id="menu_side">
+
+        
+        
+
+        <div class="name__page">
+            <i class="fa-brands fa-slack"></i>
+            <h4><b>ACS</b> </h4>
+            
+        </div>
+        
+        
+
+        <div class="options__menu">	
+
+            <a href="{%url 'inicio' %}" class="">
+                <div class="option">
+                    <i class="fas fa-home" title="Inicio"></i>
+                    <h4>Inicio</h4>
+                </div>
+            </a>
+
+            <a href="{%url 'ver_producto'%}">
+                <div class="option">
+                    <i class="fa-brands fa-dropbox"></i>
+                    <h4>Productos</h4>
+                </div>
+            </a>
+            
+            <a href="{%url 'cliente'%}">
+                <div class="option">
+                    <i class="fa-solid fa-users" title="Clientes"></i>
+                    <h4>Clientes</h4>
+                </div>
+            </a>
+
+           
+
+            <a href="{%url 'venta'%}">
+                <div class="option">
+                    <i class="fa-solid fa-cart-shopping" title="Ventas"></i>
+                    <h4>Venta</h4>
+                </div>
+            </a>
+
+            <a href="{%url 'fechas'%}">
+                <div class="option">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h4>Reportes</h4>
+                    
+                    
+                </div>
+            </a>
+
+
+
+
+           <div class="aparte">
+            
+            <a>
+                <div class="option">
+                    <i class="fa-regular fa-user"></i>
+                    <h4> <b>User:{{user.username | upper}}</b> </h4>
+                    
+                    
+                </div>
+            </a>
+
+            <a href="{%url 'cerrar_sesion'%}">
+                <div class="option">
+                    <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
+                    <h4>Salir</h4>
+                    
+                    
+                </div>
+            </a>
+
+
+           </div>
+
+
+        </div>
+        
+
+    </div>
+
+    
+   
+    
+    {%block content %}
+
+    <section class="seccion_pre" id="seccion_pre">
+        {%if mensaje%}
+
+    <div class="alert alert-danger alerta">
+    !!!!!!!existen recibos sin cerrar
+
+    </div>
+    {%for recibo in recibos%}
+    <p>numero de recibo: <b>{{recibo}}</b> </p>
+    {%endfor%}
+    <div class="alert alert-dark">
+        Nota: Recuerde que los recibos que no estén cerrados, descuentan productos en stock, y aumentan valor en reporte diario
+    </div>
+    <div class="alert alert-info">
+        <h2>para cerrar o eliminar el recibo sin finalizar:</h2>
+        1.vaya al modulo de ventas y registre otra venta con ese mismo recibo si el cliente requiere algun producto adicional.
+    </div>
+    <div class="alert alert-info">
+        
+        2.si no desea agregar otro producto y quiere cerrar el recibo, digite 0 en la cantidad, y el numero del recibo que quiere cerrar.
+        (no importa que producto digite)
+    </div>
+    {%endif%}
+        
+    
+        <img src="{%static 'img/icon.jpg'%}" alt="">
+        <h2>Audiconsystem</h2>
+        <hr>
+        <p>Sistema de automatización para control de inventario, de uso continuo, con modulos de venta, reporte, registro.
+            generador de facturas, stock. entre otras funciones.
+        </p>
+        </section>
+
+        <style>
+           
+            section{
+                margin-top: 10%;
+                padding-left: 10%;
+                padding-right: 5%;
+                margin-bottom: 5%;
+                font-size: 20px;
+                color: rgb(0, 0, 0);
+                text-align: center;
+            }
+            #seccion_pre h2{
+                color: blue;
+
+            }
+            #seccion_pre hr{
+                border-top: 2px solid rgb(15, 177, 247);
+            }
+            section img{
+                width: 50%;
+                text-align: center;
+            }
+            section p{
+                text-align: left;
+            }
+          
+            
+        </style>
+   
+
+
+
+    
+    {%endblock%}
+    
+   
+    <script src="{% static 'js/script.js'%} "></script>
+    {%block extrajs%}
+    {%endblock extrajs%}
+</body>
+</html>

@@ -1,0 +1,117 @@
+{%extends "index.html"%}{%block content%}
+{%load crispy_forms_tags%}
+
+<body>
+    <div class="vista">
+
+        <div class="tabla">
+
+            {%include "tablacar.html"%}
+            
+
+
+        </div>
+
+
+
+
+
+        <div class="formulario">
+            <h2>Registrar venta</h2>
+            <form method="POST">
+                {%csrf_token%}
+                
+                <fieldset >
+                    {{formulario | crispy}}
+
+                    {%if factura_repetida%}
+                    <div class="alert alert-danger" role="alert">
+                        la factura ya existe en reportes
+                      </div>
+
+
+                    {%endif%}
+    
+    
+                    {%if error_cantidad%}
+                  
+                    <div class="alert alert-danger" role="alert">
+                      la cantidad supera el limite en stock
+                    </div>
+                     {%elif mensaje_agregado%}
+                     <div class="alert alert-success" role="alert">
+                        producto agregado con exito
+                       </div>
+                    
+                    {%endif%}
+    
+                   
+    
+    
+                    
+                
+               
+                  <button type="submit" class="btn btn-success">Agregar</button>
+                  {%if factura_no%}
+                  <a href="{% url 'recibo' factura%}" class="btn btn-primary">Finalizar venta</a>
+                  {%endif%}
+                  
+                </fieldset>
+              </form>
+            
+    
+             
+        </div>
+        
+        
+    </div>
+   
+    <style>
+        .vista{
+            display: flex;
+        }
+        .tabla{
+            width: 70%;
+            margin-top: 10%;
+            margin-left: 10%;
+        }
+        .formulario input{
+            display: block;
+            margin-bottom: 5%;
+            justify-content: center;
+            width: 500px;
+            
+        }
+        .formulario{
+            display: block;
+            width: 50%;
+            color: aliceblue;
+            margin-top: 10%;
+            justify-content: center;
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 5%;
+            background-color: rgb(10, 75, 186);
+            border-radius: 60px;
+            
+            
+        }
+        .formulario button,.formulario a{
+            margin-left: 10%;
+            margin-top: 10%;
+        }
+        .formulario h2{
+           color: rgb(255, 255, 255);
+        }
+        
+        body{
+            background-color: rgb(220, 220, 220);
+        }
+
+    </style>
+   
+    
+</body>
+
+{%endblock%}
+

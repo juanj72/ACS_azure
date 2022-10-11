@@ -1,0 +1,40 @@
+{%extends "index.html"%} {%block content%}
+
+<body>
+    <section class="form-register">
+
+        <form method="POST">
+            {%csrf_token%}
+
+        
+        
+      <h4>Formulario Registro Producto</h4>
+      
+      {%for campo in formulario%}
+      <p><b>{{campo.label}}:</b></p>
+      <input 
+      class="controls" 
+      type="{{campo.field.widget.input_type}}" 
+      name="{{campo.name}}" 
+      id="nombres" 
+      placeholder="{{campo.label}}" 
+      value="{{campo.value | default:''}}"
+      required>
+      
+
+      
+
+      {%endfor%}
+      
+      <input class="btn btn-primary" type="submit" value="enviar registro">
+    </form>
+      
+      
+    </section>
+  
+  </body>
+
+
+{%endblock%}
+
+

@@ -1,0 +1,57 @@
+{%extends "index.html"%}{%block content%}
+
+<section>
+    <a href="{% url 'fechas'%}" class="btn btn-secondary">reporte venta diaria</a>
+    
+      <h2><b>Reporte de ventas por producto</b> </h2>
+      
+   
+ 
+  
+  
+  <table class="table table-striped">
+    
+      <thead>
+        <tr>
+          <!--<th scope="col">id venta</th>-->
+          <th scope="col">producto</th>
+          <th scope="col">cantidad vendida</th>
+          <th scope="col">total</th>
+       
+          
+  
+        </tr>
+      </thead>
+      <tbody>
+        
+               {%for reporte in reporte%}
+        <tr>
+          <!--<th scope="row">{{reporte.id_de_venta}}</th>-->
+          
+          <td>{{reporte.Nombre_producto}}</td>
+          <td>{{reporte.cantidad_vendida}}</td>
+          <td>$ {{reporte.total_vendido}}</td>
+         
+          
+        </tr>
+  
+        {%endfor%}
+  
+        
+   
+        
+      </tbody>
+    </table>
+  
+   
+  </section>
+  
+  
+    <style>
+      section{
+          margin: 10%;
+      }
+  
+    </style>
+
+{%endblock%}

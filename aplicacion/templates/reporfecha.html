@@ -1,0 +1,70 @@
+{%extends "index.html"%}{%block content%}
+ <section>
+  <a href="{% url 'total_productos_vendidos'%}" class="btn btn-secondary">productos por cantidad</a>
+
+    <h2><b>Reporte de ventas Diario</b> </h2>
+    
+ 
+<form action="" method="POST">
+    {%csrf_token%}
+    <input type="date" name="fecha" required>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+
+<table class="table table-striped">
+  
+    <thead>
+      <tr>
+        <!--<th scope="col">id venta</th>-->
+        <th scope="col">fecha_compra</th>
+        <th scope="col">cliente</th>
+        <th scope="col">producto</th>
+        <th scope="col">precio</th>
+        <th scope="col">cantidad</th>
+        <th scope="col">total</th>
+        <th scope="col">Recibo</th>
+        
+
+      </tr>
+    </thead>
+    <tbody>
+      
+             {%for reporte in reporte%}
+      <tr>
+        <!--<th scope="row">{{reporte.id_de_venta}}</th>-->
+        
+        <td>{{reporte.fecha_de_compra}}</td>
+        <td>{{reporte.nombre_cliente}}</td>
+        <td>{{reporte.producto}}</td>
+        <td><b>$</b> {{reporte.valor_publico}}</td>
+        <td>{{reporte.cantidad}}</td>
+        <td><b>$</b> {{reporte.total}}</td>
+        <td><b>{{reporte.factura}}</b></td>
+        
+      </tr>
+
+      {%endfor%}
+
+      
+ 
+      
+    </tbody>
+  </table>
+
+  {%for total in total%}
+
+  <h2>Total venta Diaria: <b>${{total.total}}</b></h2>
+  {%endfor%}
+</section>
+
+
+  <style>
+    section{
+        margin: 10%;
+    }
+
+  </style>
+
+
+{%endblock%}

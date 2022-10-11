@@ -1,0 +1,74 @@
+{%extends "index.html"%}{%block content%}
+<body>
+    <div class="formulario">
+        <h2>Editar Producto</h2>
+        <form action="" method="POST">
+            {%csrf_token%}
+            
+       {% for campo in formulario%}
+       <p>{{campo.label}}</p>
+            <input 
+            class="controls" 
+      type="{{campo.field.widget.input_type}}" 
+      name="{{campo.name}}" 
+      id="nombres" 
+      placeholder="{{campo.label}}" required
+            value="{{campo.value}}">
+
+       {%endfor%}
+            
+            <!--
+    <p>valor N</p>
+            <input type="text">
+            <p>valor p</p>
+            <input type="text">
+            <p>cantidad</p>
+            <input type="text">
+
+-->
+            
+        
+
+            <input class="btn btn-success" type="submit" value="Actualizar">
+            <a href="{%url 'ver_producto'%}" class="btn btn-danger">cancelar</a>
+            
+        </form>
+
+        
+    </div>
+    <style>
+        .formulario input{
+            display: block;
+            margin-bottom: 5%;
+            justify-content: center;
+            width: 500px;
+            
+        }
+        .formulario{
+            width: 50%;
+            color: rgb(0, 0, 0);
+            margin-top: 10%;
+            justify-content: center;
+            padding-left: 35%;
+            padding-bottom: 5%;
+            
+            
+        }
+        .formulario button{
+            margin-left: 80%;
+            margin-top: 10%;
+        }
+        .formulario h2{
+           color: rgb(0, 0, 0);
+        }
+        
+        body{
+            background-color: rgb(255, 255, 255);
+            
+        }
+
+    </style>
+   
+    
+</body>
+{%endblock%}

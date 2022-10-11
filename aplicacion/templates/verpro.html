@@ -1,0 +1,99 @@
+{%extends "index.html"%} {%block content%}
+
+<div class="tabla_prod">
+
+    <h2><b>Productos</b></h2>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <b>+</b> agregar producto
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Resgistrar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        
+        <form method="POST">
+          {%csrf_token%}
+
+      
+      
+    <h4>Formulario Registro Producto</h4>
+    
+    {%for campo in formulario%}
+    <p><b>{{campo.label}}:</b></p>
+    <input 
+    class="controls" 
+    type="{{campo.field.widget.input_type}}" 
+    name="{{campo.name}}" 
+    id="nombres" 
+    placeholder="{{campo.label}}" 
+    value="{{campo.value | default:''}}"
+    required>
+    
+
+    
+
+    {%endfor%}
+    
+    <input class="btn btn-primary" type="submit" value="enviar registro">
+  </form>
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">nombre del producto</th>
+           <!-- <th scope="col">valor neto</th>--> 
+            <th scope="col">valor publico</th>
+            <th scope="col">cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+            {%for prod in productos%}
+          <tr>
+            <th scope="row">{{prod.id}}</th>
+            <td>{{prod.Nombre_producto}}</td>
+            <!--<td>${{prod.valor_neto}}</td>-->
+            <td>${{prod.valor_publico}}</td>
+            <td>{{prod.cantidad}}</td>
+            <td><a class="btn btn-primary" href="{%url 'modal_editar' prod.id %}">Editar</a></td>
+            <td><a href="{%url 'eliminar' prod.id %}" class="btn btn-danger">eliminar</a> </td>
+           
+            
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+      <div class="modal fade " id="contenido" role="dialog">
+
+      </div>
+      
+
+   
+
+
+
+</div>
+
+
+
+{%endblock%}

@@ -1,0 +1,63 @@
+{%extends "index.html"%} {%block content%}
+
+
+
+
+
+
+
+
+
+
+
+<div class="tablareportes">
+  <h2>Reporte de ventas</h2>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <!--<th scope="col">id venta</th>-->
+            <th scope="col">Cliente</th>
+            <th scope="col">Producto</th>
+            <th scope="col">cantidad</th>
+            <th scope="col">Fecha de venta</th>
+            <th scope="col">valor unitario</th>
+            <th scope="col">Factura</th>
+            <th scope="col">total</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+                 {%for reporte in reportes%}
+          <tr>
+            <!--<th scope="row">{{reporte.id_de_venta}}</th>-->
+            
+            <td>{{reporte.cliente}}</td>
+            <td>{{reporte.Producto}}</td>
+            <td>{{reporte.cantidad}}</td>
+            <td>{{reporte.fecha_compra}}</td>
+            <td>{{reporte.valor}}</td>
+            <td>{{reporte.factura}}</td>
+            <td>{{reporte.total}}</td>
+            
+          </tr>
+
+          {%endfor%}
+
+          
+     
+          
+        </tbody>
+      </table>
+
+      
+</div>
+
+<style>
+    .tablareportes{
+        margin-top: 10%;
+        margin-left: 10%;
+        margin-right: 5%;
+    }
+</style>
+{%endblock%}

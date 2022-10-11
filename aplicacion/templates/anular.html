@@ -1,0 +1,40 @@
+{%extends "index.html"%}{%block content%}
+
+<div class="content">
+    <h2>Anular Recibo</h2>
+    <form action="" class="formulario_anulacion" method="POST">
+        {%csrf_token%}
+
+        <select class="form-select" aria-label="Default select example" name="anular">
+            {%for reporte in recibo%}
+          <option value="{{reporte.numero_factura}}">{{reporte.numero_factura}}</option>
+           {%endfor%}
+          </select>
+
+          <button class="btn btn-primary" type="submit">Anular</button>
+
+          {%if exito%}
+          <div class="alert alert-success">
+            se ha anulado el recibo
+          </div>
+          {%endif%}
+
+        
+    </form>
+</div>
+
+<style>
+    .content{
+        
+        margin: 20%;
+    }
+    .formulario_anulacion{
+        width: 100%;
+
+    }
+</style>
+
+
+
+
+{%endblock%}

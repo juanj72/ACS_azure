@@ -1,0 +1,35 @@
+{%extends "index.html"%} {%block content%}
+
+
+
+<div class="tabla_prod">
+  <h2>Clientes</h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">nombre de cliente</th>
+            <th scope="col">documento</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+            {%for cliente in cliente %}
+          <tr>
+            <th scope="row">{{cliente.id}}</th>
+            <td>{{cliente.Nombre_cliente}}</td>
+            <td>{{cliente.Documento}}</td>
+           
+            
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+
+
+</div>
+
+
+
+{%endblock%}
+

@@ -1,0 +1,83 @@
+{%extends "index.html"%}{%block content%}{%load static%}
+
+
+<div class="recibo" id="seleccion">
+    <img src="{% static 'img/icon2.png'%}" alt="">
+    <p><b>Cra 6 # 8 - 16, barrio centro</b></p>
+    <p>3112648468</p>
+    <p>Audicomsystem@gmail.com</p>
+    
+    <h1>Recibo</h1>
+    <h2>Recibo: {{datos.0.numero_factura}}</h2>
+    <h3>Cliente: {{datos.0.Nombre_cliente}}</h3>
+    {%for data in datos%}
+    <hr>
+    <p>Producto: {{data.Nombre_producto}}</p>
+    <p>Cantidad: {{data.cantidad}} </p>
+    <p>total: {{data.total}}</p>
+    <hr>
+    <!--<p>Cliente: {{data.Nombre_cliente}}</p>-->
+    
+    {%endfor%}
+
+    {%for total in total%}
+    <h3>Total compra: $<b>{{total.total}}</b></h3>
+    {%endfor%}
+    
+   
+</div>
+
+
+<script language="Javascript">
+	function imprSelec(nombre) {
+	  var ficha = document.getElementById(nombre);
+	  var ventimp = window.open(' ', 'popimpr');
+	  ventimp.document.write( ficha.innerHTML );
+	  ventimp.document.close();
+	  ventimp.print( );
+	  ventimp.close();
+	}
+	</script>
+
+
+
+
+
+
+
+
+<div class="botones">
+    
+<a href="javascript:imprSelec('seleccion')" class="btn btn-success">Imprimir</a>
+<a href="{%url 'inicio'%}" class="btn btn-primary">volver a inicio</a>
+
+</div>
+
+
+
+<style>
+    .recibo{
+        width: 30%;
+        
+       text-align: center;
+       margin-top: 10%;
+       margin-left: 35%;
+       background-color: rgba(211, 211, 211, 0.504);
+       padding-bottom: 2%;
+       padding-top: 1%;
+        
+    }
+    .botones{
+        width: 30%;
+        
+        text-align: center;
+        margin-top: 2%;
+        margin-left: 35%;
+       
+      
+
+    }
+</style>
+
+
+{%endblock%}

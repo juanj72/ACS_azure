@@ -1,0 +1,202 @@
+{%extends "index.html"%}{%block content%}
+<section class="venta">
+    <div>
+        <h2 class="tit">
+            <b>Registrar ventas</b>
+            <hr>
+            
+            
+        </h2>
+       
+
+     
+       
+    </div>
+
+
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Crear cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="POST">
+                {%csrf_token%}
+                {%for campo_cliente in formulario_cliente%}
+                <p>{{campo_cliente.label}}</p>
+                <input 
+                
+      class="controls" 
+      type="{{campo_cliente.field.widget.input_type}}" 
+      name="{{campo_cliente.name}}" 
+      id="nombres" 
+      placeholder="{{campo_cliente.label}}" 
+      value="{{campo_cliente.value | default:''}}"
+      required
+                >
+
+                {%endfor%}
+
+                 
+<!--
+    
+                <p>item2</p>
+                <input type="text">
+                <p>item3</p>
+                <input type="text">
+
+-->
+
+                <input class="btn btn-success" type="submit" value="Crear cliente" href="#">
+                
+            </form>
+          ...
+        </div>
+        <div class="modal-footer">
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="sec_form">
+        <div class="formulario" >
+            
+                <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+crear cliente  </button>
+            
+
+        </div>
+        <div class="formulario">
+            <a href="{%url 'prueba_venta'%}" class="btn btn-success">registrar venta cliente creado </a>
+            <a href="{% url 'anular'%}" class="btn btn-warning">anular venta</a>
+
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+              visualizar ventas
+            </button>
+            
+            
+
+        </div>
+    </div>
+
+
+  
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ventas hechas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">id venta</th>
+              <th scope="col">fecha</th>
+              <th scope="col">id cliente</th>
+              <th scope="col">id_producto</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {%for venta in ventas%}
+            <tr>
+              <th scope="row">{{venta.id}}</th>
+              <td>{{venta.fecha_compra}}</td>
+              <td>{{venta.idCliente_id}}</td>
+              <td>{{venta.idProducto_id}}</td>
+              
+            </tr>
+            {%endfor%}
+       
+          </tbody>
+        </table>
+
+
+
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+<style>
+  
+
+.venta{
+    margin-left: 10%;
+    margin-top: 10%;
+    margin-right: 7%;
+    margin-bottom: 5%;
+    padding-bottom: 5%;
+}
+.sec_form{
+    display: flex;
+    border-radius: 30px;
+    background-color: rgb(15, 52, 140);
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    padding-bottom: 5%;
+}
+.formulario{
+    display: block;
+}
+.tit{
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+i{
+    text-align: center;
+}
+
+</style>
+
+
+{%endblock%}
