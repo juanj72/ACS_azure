@@ -19,7 +19,7 @@ from django.contrib.auth import logout
 
 # Create your views here.
 
-@login_required
+#@login_required
 def inicio(request):
 
        with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
@@ -114,7 +114,7 @@ def ver_ventas():
 
 
 
-@login_required
+#@login_required
 def clientes(request):
     clientesp=cliente.objects.all()
     data={
@@ -123,7 +123,7 @@ def clientes(request):
     return render(request,"clientes.html",data)
 
 
-@login_required
+#@login_required
 def ver_producto(request):
     productopy=producto.objects.all()
     
@@ -139,7 +139,7 @@ def ver_producto(request):
 
 
 
-@login_required
+#@login_required
 def eliminarpro(request,id):
     pro=producto.objects.get(id=id)
     pro.delete()
@@ -151,7 +151,7 @@ def eliminarpro(request,id):
 
 
 
-@login_required
+#@login_required
 def editar(request, id):
     productopy=producto.objects.get(id=id)
     formulario=Formularioproducto(request.POST or None, instance=productopy)
@@ -162,7 +162,7 @@ def editar(request, id):
 
 
 
-@login_required
+#@login_required
 def ventasr(request):
     formulario = Formulario_clientes(request.POST or None)
     #formulario2= Formulario_ventas(request.POST or None)
@@ -180,7 +180,7 @@ def ventasr(request):
 
 
 
-@login_required
+#@login_required
 def reportes(request):
     #ventar=ventas.objects.values()
     
@@ -216,7 +216,7 @@ def reportes(request):
 
 
 
-@login_required
+#@login_required
 def venta_registro(request):
     #clientes=cliente.objects.all()
     productos=producto.objects.all()
@@ -262,7 +262,7 @@ def venta_registro(request):
 
     return render(request,"pruebaventa.html",{"factura_repetida":factura_repetida,"formulario":formulario,"error_cantidad":mensaje_cantidad,"mensaje_agregado":mensaje_agregado,"carro":carro,"total":total,"factura_no":mensaje_agregado,"factura":factura})
 
-@login_required
+#@login_required
 def eliminar_venta(request,id):
  vent=ventas.objects.filter(numero_factura=id) 
  vent.delete()
@@ -391,7 +391,7 @@ def total_carrito(factura):
 
 
 
-@login_required
+#@login_required
 def fechas(request):
     #fecha=request.POST['fecha']
     
@@ -499,7 +499,7 @@ def add_reporte(factura):
 
 
 
-@login_required
+#@login_required
 def recibo(request,factura):
     add_reporte(factura)
     total_venta2=total_carrito(factura)
@@ -521,7 +521,7 @@ def cerrar_sesion(request):
     return redirect('/')
 
 
-@login_required
+#@login_required
 def anulacion(request):
       
        with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
