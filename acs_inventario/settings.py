@@ -10,10 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
+
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+STATICFILES_DIRS=(
+    os.path.join(BASE_DIR,'static'),
+)
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,9 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['audicomsystem.azurewebsites.net']
 
-STATICFILES_DIRS=(
-    os.path.join(BASE_DIR,'static'),
-)
+
 
 
 CSRF_TRUSTED_ORIGINS = ['https://audicomsystem.azurewebsites.net']
