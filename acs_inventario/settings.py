@@ -25,12 +25,14 @@ SECRET_KEY = 'django-insecure-%-@g)*qn)b4-yjqc6u@#f*k!15419q3vdxxnftkm-fckv=@&70
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['inpecgestorintento57.azurewebsites.net']
+ALLOWED_HOSTS = ['audicomsystem.azurewebsites.net']
 
 STATICFILES_DIRS=(
     os.path.join(BASE_DIR,'static'),
 )
 
+
+CSRF_TRUSTED_ORIGINS = ['https://audicomsystem.azurewebsites.net']
 
 # Application definition
 
