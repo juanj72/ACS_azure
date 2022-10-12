@@ -1,10 +1,10 @@
 
-from audioop import add
+#from audioop import add
 from datetime import date
 from operator import index
-from sqlite3 import Cursor
-from unicodedata import name
-from warnings import catch_warnings
+#from sqlite3 import Cursor
+#from unicodedata import name
+#from warnings import catch_warnings
 from django.shortcuts import render, redirect
 from django.db import connection
 from django.contrib.auth.decorators import login_required
@@ -12,9 +12,9 @@ from aplicacion.forms import Formulario_clientes, Formulario_ventas, Formulariop
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpRequest
+#from django.utils.decorators import method_decorator
+#from django.views.decorators.csrf import csrf_exempt
+#from django.http import HttpRequest
 from django.contrib.auth import logout
 
 # Create your views here.
@@ -373,20 +373,6 @@ def total_carrito(factura):
         connection.close()
 
      return (data)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
