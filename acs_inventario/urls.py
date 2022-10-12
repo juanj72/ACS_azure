@@ -19,12 +19,11 @@ from django.contrib.auth.views import logout_then_login, LoginView
 from aplicacion import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('',include('aplicacion.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('',views.inicio,name='inicio'),
+     path('',views.inicio,name='inicio'),
     path('cliente',views.clientes,name="cliente"),
     path('verpro',views.ver_producto,name="ver_producto"),
     path('eliminar/<int:id>',views.eliminarpro,name="eliminar"),
