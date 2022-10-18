@@ -3,7 +3,7 @@ from .import views
 
 
 urlpatterns=[
-    #path('',views.inicio,name='inicio'),
+    path('',views.inicio,name='inicio'),
     #path('/cliente',views.clientes,name="cliente"),
     #path('/verpro',views.ver_producto,name="ver_producto"),
     #path('/eliminar/<int:id>',views.eliminarpro,name="eliminar"),

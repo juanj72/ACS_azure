@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -27,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['https://audicomsystem.azurewebsites.net']
 #ALLOWED_HOSTS = ['*']
+
+STATICFILES_DIRS=(
+    os.path.join(BASE_DIR,'static'),
+)
 
 
 # Application definition
