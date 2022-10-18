@@ -415,7 +415,7 @@ def listado_productos():
 
 
         # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-        cursor.execute('call listado_productos_vendidos')
+        cursor.execute('call listado_productos_vendidos()')
         #total=total_fecha(fecha)
 
         columns = []  # Para guardar el nombre de las columnas
