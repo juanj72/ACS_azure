@@ -333,3 +333,5 @@ def recibo(request,factura):
     add_reporte(factura)
     total_venta2=total_carrito(factura)
     datos_venta1=carrito(factura)
+    
+    return render(request,'recibo.html',{"total":total_venta2,"datos":datos_venta1})
