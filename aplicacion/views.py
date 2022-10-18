@@ -448,3 +448,36 @@ def total_productos(request):
     total_prod=listado_productos()
 
     return render(request,"cantidad_producto_vendido.html",{"reporte":total_prod})
+
+
+
+
+def reportes(request):
+    #ventar=ventas.objects.values()
+    
+    with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
+
+        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
+        cursor.execute('call Reportes()')
+
+        columns = []  # Para guardar el nombre de las columnas
+
+        # Recorrer la descripcion (Nombre de la columna)
+        for column in cursor.description:
+
+            columns.append(column[0])  # Guardando el nombre de las columnas
+
+        data = []  # Lista con los datos que vamos a enviar en JSON
+
+        for row in cursor.fetchall():  # Recorremos las fila guardados de la BD
+
+            # Insertamos en data un diccionario
+            data.append(dict(zip(columns, row)))
+
+        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
+
+        connection.commit()  # Enviamos la sentencia a la BD
+        connection.close()
+
+
+    return render(request,"reportes.html",{'reportes':data})
