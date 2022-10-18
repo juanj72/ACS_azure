@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 
 import os
+from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 STATICFILES_DIRS=(
     os.path.join(BASE_DIR,'static'),
 )
@@ -31,6 +32,7 @@ SECRET_KEY = 'django-insecure-%-@g)*qn)b4-yjqc6u@#f*k!15419q3vdxxnftkm-fckv=@&70
 DEBUG = True
 
 ALLOWED_HOSTS = ['audicomsystem.azurewebsites.net']
+#ALLOWED_HOSTS = ['*']
 
 
 
@@ -105,6 +107,17 @@ DATABASES = {
         'PORT':'3306'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'acs_inventario',
+#         'USER':'root',
+#         'PASSWORD':'',
+#         'HOST':'localhost',
+#         'PORT':'3306'
+#     }
+# }
 
 
 # Password validation
