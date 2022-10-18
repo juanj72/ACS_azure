@@ -307,3 +307,29 @@ def fechas(request):
     return render(request,"reporfecha.html",{'reporte':data,'total':data2})
 
 
+
+def add_reporte(factura):
+     with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
+    
+
+
+        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
+        cursor.execute(f'call add_reporte({factura})')
+        #total=total_fecha(fecha)
+
+       
+
+        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
+
+        connection.commit()  # Enviamos la sentencia a la BD
+        connection.close()
+
+     pass
+
+
+
+
+def recibo(request,factura):
+    add_reporte(factura)
+    total_venta2=total_carrito(factura)
+    datos_venta1=carrito(factura)
