@@ -1,10 +1,7 @@
 from django.shortcuts import render,redirect
 from aplicacion import models
 from aplicacion.forms import Formulario_clientes, Formulario_ventas, Formularioproducto
-from datetime import date
 from django.db import connection
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -71,48 +68,51 @@ def ventasr(request):
     return render(request,"venta.html",{'formulario_cliente':formulario,'ventas':muestravent})
 
 
-def eliminar_venta(request,id):
- vent=models.ventas.objects.filter(numero_factura=id) 
- vent.delete()
- return redirect('prueba_venta')
+
+def venta_registro(request):
+    #clientes=cliente.objects.all()
+    productos=models.producto.objects.all()
+    formulario=Formulario_ventas(request.POST or None)
+    mensaje_cantidad=False
+    mensaje_agregado=False
+    reporte=ver_reportes()
+    arr_report=[]
+    for i in range(len(reporte)):
+        arr_report.append(reporte[i]['numero_factura'])
+
+    factura_repetida=None
+    carro=None
+    total=None
+    factura=None
+
+    if request.POST.get('idCliente') and request.POST.get('idProducto')and request.POST.get('cantidad') and request.POST.get('numero_factura') and int(request.POST['numero_factura']) not in arr_report:
+        productos=models.producto.objects.get(id=request.POST['idProducto'])
+        
+        
+        
 
 
+        if productos.cantidad<int(request.POST['cantidad']) or int(request.POST['cantidad'])<=0:
+            mensaje_cantidad=True
 
+        else:
+           
+            var1=request.POST['idCliente']
+            print(var1)
+            formulario.save()
+            mensaje_agregado=True            
+            factura=request.POST['numero_factura']
+        carro=carrito(request.POST['numero_factura'])
+        total=total_carrito(request.POST['numero_factura'])
+        
+        if factura!=None:
+            mensaje_agregado=True
+    else:
+        factura_repetida=True
 
+                
 
-def ver_reportes():
-      with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
-    
-
-
-        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-        cursor.execute('call ver_reportes()')
-        #total=total_fecha(fecha)
-
-        columns = []  # Para guardar el nombre de las columnas
-
-        # Recorrer la descripcion (Nombre de la columna)
-        for column in cursor.description:
-
-            columns.append(column[0])  # Guardando el nombre de las columnas
-
-        data = []  # Lista con los datos que vamos a enviar en JSON
-
-        for row in cursor.fetchall():  # Recorremos las fila guardados de la BD
-
-            # Insertamos en data un diccionario
-            data.append(dict(zip(columns, row)))
-
-        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
-
-        connection.commit()  # Enviamos la sentencia a la BD
-        connection.close()
-
-      return (data)
-    
-
-
-
+    return render(request,"pruebaventa.html",{"factura_repetida":factura_repetida,"formulario":formulario,"error_cantidad":mensaje_cantidad,"mensaje_agregado":mensaje_agregado,"carro":carro,"total":total,"factura_no":mensaje_agregado,"factura":factura})
 
 
 
@@ -151,6 +151,7 @@ def carrito(factura):
 
 
 
+
 def total_carrito(factura):
 
      with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
@@ -183,41 +184,13 @@ def total_carrito(factura):
      return (data)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def fechas(request):
-    #fecha=request.POST['fecha']
+def ver_reportes():
+      with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
     
-    with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
-
-        if 'fecha' in request.POST:
-            fecha=request.POST['fecha']
-            print(fecha)
-            
-
-
-        else:
-            fecha=date.today()
-            #total=total_fecha('2022-09-15')
 
 
         # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-        cursor.execute(f'call reporte_fecha(\'{fecha}\')')
+        cursor.execute('call ver_reportes()')
         #total=total_fecha(fecha)
 
         columns = []  # Para guardar el nombre de las columnas
@@ -239,202 +212,4 @@ def fechas(request):
         connection.commit()  # Enviamos la sentencia a la BD
         connection.close()
 
-        #print(data)
-
-
-    with connection.cursor() as cursor2:  # Activamos un cursor para las consultas a la BD
-
-         if 'fecha' in request.POST:
-            fecha2=request.POST['fecha']
-            print(fecha2)
-            
-
-
-         else:
-            fecha2=date.today()
-            #total=total_fecha('2022-09-15')
-
-
-        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-         cursor2.execute(f'call total_ventas_diarias(\'{fecha2}\')')
-        #total=total_fecha(fecha)
-
-         columns2 = []  # Para guardar el nombre de las columnas
-
-        # Recorrer la descripcion (Nombre de la columna)
-         for column2 in cursor2.description:
-
-            columns2.append(column2[0])  # Guardando el nombre de las columnas
-
-         data2 = []  # Lista con los datos que vamos a enviar en JSON
-
-         for row2 in cursor2.fetchall():  # Recorremos las fila guardados de la BD
-
-            # Insertamos en data un diccionario
-            data2.append(dict(zip(columns2, row2)))
-
-         cursor2.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
-
-         connection.commit()  # Enviamos la sentencia a la BD
-         connection.close()
-
-         print(data2)   
-
-
-    return render(request,"reporfecha.html",{'reporte':data,'total':data2})
-
-
-
-def add_reporte(factura):
-     with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
-    
-
-
-        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-        cursor.execute(f'call add_reporte({factura})')
-        #total=total_fecha(fecha)
-
-       
-
-        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
-
-        connection.commit()  # Enviamos la sentencia a la BD
-        connection.close()
-
-     pass
-
-
-
-
-
-
-def recibo(request,factura):
-    add_reporte(factura)
-    total_venta2=total_carrito(factura)
-    datos_venta1=carrito(factura)
-    
-
-   
-
-    
-
-    return render(request,'recibo.html',{"total":total_venta2,"datos":datos_venta1})
-
-
-
-def cerrar_sesion(request):
-
-    logout(request)
-
-    return redirect('/')
-
-
-
-def anulacion(request):
-      
-       with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
-    
-
-
-        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-        cursor.execute('select distinct numero_factura from aplicacion_reportes')
-        #total=total_fecha(fecha)
-
-        columns = []  # Para guardar el nombre de las columnas
-
-        # Recorrer la descripcion (Nombre de la columna)
-        for column in cursor.description:
-
-            columns.append(column[0])  # Guardando el nombre de las columnas
-
-        data = []  # Lista con los datos que vamos a enviar en JSON
-
-        for row in cursor.fetchall():  # Recorremos las fila guardados de la BD
-
-            # Insertamos en data un diccionario
-            data.append(dict(zip(columns, row)))
-
-        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
-
-        connection.commit()  # Enviamos la sentencia a la BD
-        connection.close()
-
-
-        mensaje_hecho=None 
-        if request.POST.get('anular'):
-
-            print(request.POST['anular'])
-            anular_venta(request.POST['anular'])
-            mensaje_hecho=True
-    
-
-        return render(request,"anular.html",{"recibo":data,"exito":mensaje_hecho})
-
-
-def anular_venta(numero_factura):
-    vent=models.ventas.objects.filter(numero_factura=numero_factura)
-    vent.delete()
-    anular_recibo(numero_factura)
-    
-    
-    pass 
-
-
-def anular_recibo(numero_factura):
-     with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
-    
-
-
-        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-        cursor.execute(f'delete from aplicacion_reportes where numero_factura={numero_factura}')
-        #total=total_fecha(fecha)
-
-       
-
-        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
-
-        connection.commit()  # Enviamos la sentencia a la BD
-        connection.close()
-     pass
-
-
-def listado_productos():
-    
-       with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
-    
-
-
-        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-        cursor.execute('call listado_productos_vendidos')
-        #total=total_fecha(fecha)
-
-        columns = []  # Para guardar el nombre de las columnas
-
-        # Recorrer la descripcion (Nombre de la columna)
-        for column in cursor.description:
-
-            columns.append(column[0])  # Guardando el nombre de las columnas
-
-        data = []  # Lista con los datos que vamos a enviar en JSON
-
-        for row in cursor.fetchall():  # Recorremos las fila guardados de la BD
-
-            # Insertamos en data un diccionario
-            data.append(dict(zip(columns, row)))
-
-        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
-
-        connection.commit()  # Enviamos la sentencia a la BD
-        connection.close()
-
-        return(data)
-
-
-
-
-
-
-def total_productos(request):
-    total_prod=listado_productos()
-
-    return render(request,"cantidad_producto_vendido.html",{"reporte":total_prod}
+      return (data)
