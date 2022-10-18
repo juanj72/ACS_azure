@@ -1,8 +1,7 @@
-from tkinter import CASCADE
-from tkinter.tix import INTEGER
 from django.db import models
 
 # Create your models here.
+
 class producto(models.Model):
     Nombre_producto=models.CharField(max_length=100)
     valor_neto=models.IntegerField()
@@ -37,4 +36,3 @@ class reportes (models.Model):
     numero_factura=models.IntegerField(null=True)
     #def __str__(self):
         #return self.numero_factura       
-
