@@ -5,7 +5,7 @@ from .import views
 
 urlpatterns=[
     path('',views.inicio,name='inicio'),
-    path('/cliente',views.clientes,name="cliente"),
+    path('cliente',views.clientes,name="cliente"),
     #path('/verpro',views.ver_producto,name="ver_producto"),
     #path('/eliminar/<int:id>',views.eliminarpro,name="eliminar"),
     #path('/editar_pro/<int:id>',views.editar,name="modal_editar"),
