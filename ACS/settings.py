@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-i+uppdw_r%_dpnba_q57@8e1gn!7^%as!2=cs_93jf9=mn_6xj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://audicomsystem.azurewebsites.net']
+ALLOWED_HOSTS = ['audicomsystem.azurewebsites.net']
 #ALLOWED_HOSTS = ['*']
 
 STATICFILES_DIRS=(
