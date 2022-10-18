@@ -335,3 +335,72 @@ def recibo(request,factura):
     datos_venta1=carrito(factura)
     
     return render(request,'recibo.html',{"total":total_venta2,"datos":datos_venta1})
+
+
+
+def anulacion(request):
+      
+       with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
+    
+
+
+        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
+        cursor.execute('select distinct numero_factura from aplicacion_reportes')
+        #total=total_fecha(fecha)
+
+        columns = []  # Para guardar el nombre de las columnas
+
+        # Recorrer la descripcion (Nombre de la columna)
+        for column in cursor.description:
+
+            columns.append(column[0])  # Guardando el nombre de las columnas
+
+        data = []  # Lista con los datos que vamos a enviar en JSON
+
+        for row in cursor.fetchall():  # Recorremos las fila guardados de la BD
+
+            # Insertamos en data un diccionario
+            data.append(dict(zip(columns, row)))
+
+        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
+
+        connection.commit()  # Enviamos la sentencia a la BD
+        connection.close()
+
+
+        mensaje_hecho=None 
+        if request.POST.get('anular'):
+
+            print(request.POST['anular'])
+            anular_venta(request.POST['anular'])
+            mensaje_hecho=True
+    
+
+        return render(request,"anular.html",{"recibo":data,"exito":mensaje_hecho})
+
+
+def anular_venta(numero_factura):
+    vent=models.ventas.objects.filter(numero_factura=numero_factura)
+    vent.delete()
+    anular_recibo(numero_factura)
+    
+    
+    pass 
+
+
+def anular_recibo(numero_factura):
+     with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
+    
+
+
+        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
+        cursor.execute(f'delete from aplicacion_reportes where numero_factura={numero_factura}')
+        #total=total_fecha(fecha)
+
+       
+
+        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
+
+        connection.commit()  # Enviamos la sentencia a la BD
+        connection.close()
+     pass
