@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from aplicacion.models import *
+from aplicacion import models
 
 # Create your views here.
 
@@ -12,7 +12,7 @@ def inicio (request):
 
 
 def clientes(request):
-    clientesp=cliente.objects.all()
+    clientesp=models.cliente.objects.all()
     data={
         'cliente':clientesp
     }
