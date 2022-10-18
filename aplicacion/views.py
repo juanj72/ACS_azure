@@ -31,3 +31,25 @@ def ver_producto(request):
          return redirect('ver_producto')
     
     return render(request,"verpro.html",{'formulario':formulario,'productos':productopy})
+
+
+
+def eliminarpro(request,id):
+    pro=models.producto.objects.get(id=id)
+    pro.delete()
+    return redirect('ver_producto')
+
+
+
+
+
+
+
+
+def editar(request, id):
+    productopy=models.producto.objects.get(id=id)
+    formulario=Formularioproducto(request.POST or None, instance=productopy)
+    if formulario.is_valid and request.method=='POST':
+        formulario.save()
+        return redirect('ver_producto')
+    return render(request,"modaleditarpro.html",{'formulario':formulario})
