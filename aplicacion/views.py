@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from aplicacion import models
+from aplicacion.forms import Formulario_clientes, Formulario_ventas, Formularioproducto
 
 # Create your views here.
 
@@ -17,3 +18,16 @@ def clientes(request):
         'cliente':clientesp
     }
     return render(request,"clientes.html",data)
+
+
+def ver_producto(request):
+    productopy=models.producto.objects.all()
+    
+    formulario = Formularioproducto(request.POST or None)
+    if request.method=='POST':
+     
+     if formulario.is_valid:
+         formulario.save()
+         return redirect('ver_producto')
+    
+    return render(request,"verpro.html",{'formulario':formulario,'productos':productopy})
