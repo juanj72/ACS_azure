@@ -117,6 +117,12 @@ def venta_registro(request):
 
 
 
+def eliminar_venta(request,id):
+ vent=models.ventas.objects.filter(numero_factura=id) 
+ vent.delete()
+ return redirect('prueba_venta')
+
+
 
 def carrito(factura):
 
