@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from aplicacion import models
 from aplicacion.forms import Formulario_clientes, Formulario_ventas, Formularioproducto
 from django.db import connection
+from datetime import date
 
 # Create your views here.
 
@@ -215,5 +216,88 @@ def ver_reportes():
       return (data)
 
 
+
+def fechas(request):
+    #fecha=request.POST['fecha']
+    
+    with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
+
+        if 'fecha' in request.POST:
+            fecha=request.POST['fecha']
+            print(fecha)
+            
+
+
+        else:
+            fecha=date.today()
+            #total=total_fecha('2022-09-15')
+
+
+        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
+        cursor.execute(f'call reporte_fecha(\'{fecha}\')')
+        #total=total_fecha(fecha)
+
+        columns = []  # Para guardar el nombre de las columnas
+
+        # Recorrer la descripcion (Nombre de la columna)
+        for column in cursor.description:
+
+            columns.append(column[0])  # Guardando el nombre de las columnas
+
+        data = []  # Lista con los datos que vamos a enviar en JSON
+
+        for row in cursor.fetchall():  # Recorremos las fila guardados de la BD
+
+            # Insertamos en data un diccionario
+            data.append(dict(zip(columns, row)))
+
+        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
+
+        connection.commit()  # Enviamos la sentencia a la BD
+        connection.close()
+
+        #print(data)
+
+
+    with connection.cursor() as cursor2:  # Activamos un cursor para las consultas a la BD
+
+         if 'fecha' in request.POST:
+            fecha2=request.POST['fecha']
+            print(fecha2)
+            
+
+
+         else:
+            fecha2=date.today()
+            #total=total_fecha('2022-09-15')
+
+
+        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
+         cursor2.execute(f'call total_ventas_diarias(\'{fecha2}\')')
+        #total=total_fecha(fecha)
+
+         columns2 = []  # Para guardar el nombre de las columnas
+
+        # Recorrer la descripcion (Nombre de la columna)
+         for column2 in cursor2.description:
+
+            columns2.append(column2[0])  # Guardando el nombre de las columnas
+
+         data2 = []  # Lista con los datos que vamos a enviar en JSON
+
+         for row2 in cursor2.fetchall():  # Recorremos las fila guardados de la BD
+
+            # Insertamos en data un diccionario
+            data2.append(dict(zip(columns2, row2)))
+
+         cursor2.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
+
+         connection.commit()  # Enviamos la sentencia a la BD
+         connection.close()
+
+         print(data2)   
+
+
+    return render(request,"reporfecha.html",{'reporte':data,'total':data2})
 
 
