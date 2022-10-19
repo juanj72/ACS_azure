@@ -71,7 +71,7 @@ def ventasr(request):
   except: 
     error=True
 
-    return render(request,"venta.html",{'formulario_cliente':formulario,'ventas':muestravent,"error":error})
+  return render(request,"venta.html",{'formulario_cliente':formulario,'ventas':muestravent,"error":error})
 
 
 @login_required
