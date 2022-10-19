@@ -100,6 +100,12 @@ crear cliente  </button>
         </div>
     </div>
 
+    {%if error%}
+    <div class="alert alert-danger">
+      !datos ingresados no validos, por favor modifique los datos para crear el cliente
+    </div>
+    {%endif%}
+
 
   
 

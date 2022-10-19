@@ -56,6 +56,8 @@ def editar(request, id):
 
 @login_required
 def ventasr(request):
+  try:
+    error=None
     formulario = Formulario_clientes(request.POST or None)
     #formulario2= Formulario_ventas(request.POST or None)
     muestravent=models.ventas.objects.all()
@@ -66,9 +68,10 @@ def ventasr(request):
          formulario.save()
          return redirect('prueba_venta')  
 
-  
+  except: 
+    error=True
 
-    return render(request,"venta.html",{'formulario_cliente':formulario,'ventas':muestravent})
+    return render(request,"venta.html",{'formulario_cliente':formulario,'ventas':muestravent,"error":error})
 
 
 @login_required
