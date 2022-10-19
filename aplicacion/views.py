@@ -4,6 +4,7 @@ from aplicacion.forms import Formulario_clientes, Formulario_ventas, Formulariop
 from django.db import connection
 from datetime import date
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 @login_required
@@ -482,3 +483,12 @@ def reportes(request):
 
 
     return render(request,"reportes.html",{'reportes':data})
+
+
+
+
+def cerrar_sesion(request):
+
+    logout(request)
+
+    return redirect('/')

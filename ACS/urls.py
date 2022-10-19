@@ -24,6 +24,7 @@ urlpatterns = [
     #path('inicio',views.inicio)
     path('',include('aplicacion.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('cerrar_sesion',views.cerrar_sesion,name="cerrar_sesion")
 ]
 
 urlpatterns += staticfiles_urlpatterns()
