@@ -18,6 +18,7 @@ urlpatterns=[
     #path('cerrar_sesion',views.cerrar_sesion,name="cerrar_sesion"),
     path('anular',views.anulacion,name="anular"),
     path('listado_productos_vent',views.total_productos,name="total_productos_vendidos")
+    
         
     
 ]

@@ -3,9 +3,10 @@ from aplicacion import models
 from aplicacion.forms import Formulario_clientes, Formulario_ventas, Formularioproducto
 from django.db import connection
 from datetime import date
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required
 def inicio (request):
     productos=models.producto.objects.all()
     
@@ -13,7 +14,7 @@ def inicio (request):
 
     return render(request,"index.html",{"productos":productos})
 
-
+@login_required
 def clientes(request):
     clientesp=models.cliente.objects.all()
     data={
@@ -21,7 +22,7 @@ def clientes(request):
     }
     return render(request,"clientes.html",data)
 
-
+@login_required
 def ver_producto(request):
     productopy=models.producto.objects.all()
     
@@ -42,7 +43,7 @@ def eliminarpro(request,id):
     return redirect('ver_producto')
 
 
-
+@login_required
 def editar(request, id):
     productopy=models.producto.objects.get(id=id)
     formulario=Formularioproducto(request.POST or None, instance=productopy)
@@ -52,7 +53,7 @@ def editar(request, id):
     return render(request,"modaleditarpro.html",{'formulario':formulario})
 
 
-
+@login_required
 def ventasr(request):
     formulario = Formulario_clientes(request.POST or None)
     #formulario2= Formulario_ventas(request.POST or None)
@@ -69,7 +70,7 @@ def ventasr(request):
     return render(request,"venta.html",{'formulario_cliente':formulario,'ventas':muestravent})
 
 
-
+@login_required
 def venta_registro(request):
     #clientes=cliente.objects.all()
     productos=models.producto.objects.all()
@@ -222,7 +223,7 @@ def ver_reportes():
       return (data)
 
 
-
+@login_required
 def fechas(request):
     #fecha=request.POST['fecha']
     
@@ -328,7 +329,7 @@ def add_reporte(factura):
 
 
 
-
+@login_required
 def recibo(request,factura):
     add_reporte(factura)
     total_venta2=total_carrito(factura)
@@ -337,7 +338,7 @@ def recibo(request,factura):
     return render(request,'recibo.html',{"total":total_venta2,"datos":datos_venta1})
 
 
-
+@login_required
 def anulacion(request):
       
        with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
@@ -451,7 +452,7 @@ def total_productos(request):
 
 
 
-
+@login_required
 def reportes(request):
     #ventar=ventas.objects.values()
     
