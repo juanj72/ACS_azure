@@ -7,13 +7,126 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 # Create your views here.
-@login_required
-def inicio (request):
-    productos=models.producto.objects.all()
+
+
+
+# @login_required
+# def inicio (request):
+#     productos=models.producto.objects.all()
     
 
 
-    return render(request,"index.html",{"productos":productos})
+#     return render(request,"index.html",{"productos":productos})
+
+
+
+
+
+
+@login_required
+def inicio(request):
+
+       with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
+    
+
+
+        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
+        cursor.execute('select distinct numero_factura from aplicacion_reportes')
+        #total=total_fecha(fecha)
+
+        columns = []  # Para guardar el nombre de las columnas
+
+        # Recorrer la descripcion (Nombre de la columna)
+        for column in cursor.description:
+
+            columns.append(column[0])  # Guardando el nombre de las columnas
+
+        data = []  # Lista con los datos que vamos a enviar en JSON
+
+        for row in cursor.fetchall():  # Recorremos las fila guardados de la BD
+
+            # Insertamos en data un diccionario
+            data.append(dict(zip(columns, row)))
+
+        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
+
+        connection.commit()  # Enviamos la sentencia a la BD
+        connection.close()
+        print(data)
+
+        arr_report=[]
+        arr_ventas=[]
+        arr_sinrep=[]
+        mensaje=None
+        for i in range(len(data)):
+         arr_report.append(data[i]['numero_factura'])
+        
+        for b in range(len(ver_ventas())):
+            arr_ventas.append(ver_ventas()[b]['numero_factura'])
+
+        #print(arr_report)
+        print('facturas en ventas')
+        #print(arr_ventas)
+
+        for z in range(len(arr_ventas)):
+            if arr_ventas[z] not in arr_report:
+                arr_sinrep.append(arr_ventas[z])
+        
+        print(arr_sinrep)
+
+        if len(arr_sinrep)!=0:
+            mensaje=True
+
+
+       
+    
+        return render(request,"./index.html",{"mensaje":mensaje,"recibos":arr_sinrep})
+
+
+
+
+
+
+
+#validacion recbo sin cerrar
+def ver_ventas():
+     with connection.cursor() as cursor:  # Activamos un cursor para las consultas a la BD
+    
+
+
+        # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
+        cursor.execute('select distinct numero_factura from aplicacion_ventas')
+        #total=total_fecha(fecha)
+
+        columns = []  # Para guardar el nombre de las columnas
+
+        # Recorrer la descripcion (Nombre de la columna)
+        for column in cursor.description:
+
+            columns.append(column[0])  # Guardando el nombre de las columnas
+
+        data = []  # Lista con los datos que vamos a enviar en JSON
+
+        for row in cursor.fetchall():  # Recorremos las fila guardados de la BD
+
+            # Insertamos en data un diccionario
+            data.append(dict(zip(columns, row)))
+
+        cursor.close()  # Se cierra el cursor para que se ejecute el procedimiento almacenado
+
+        connection.commit()  # Enviamos la sentencia a la BD
+        connection.close()
+
+        return(data)
+
+
+
+
+
+
+
+
+
 
 @login_required
 def clientes(request):
