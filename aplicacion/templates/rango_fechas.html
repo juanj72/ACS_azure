@@ -1,0 +1,87 @@
+{% extends "index.html"%}{%block content%}
+
+<style>
+
+    .tabla_fechas_rango{
+        width: 60%;
+        margin-top: 7%;
+        margin-left: 20%;
+        margin-right: 10%;
+        margin-bottom: 10%;
+
+
+    }
+    .formulario{
+      margin-top: 4%;
+      margin-left: 20%;
+    }
+    h1{
+      margin-top: 10%;
+      margin-left: 10%;
+    }
+</style>
+
+<h1>Total por rango de fechas</h1>
+
+<form method="POST" class="formulario">
+  
+  {%csrf_token%}
+  <label for="">fecha inicio</label>
+  <input type="date" name="fecha" required>
+  <label for="">fecha fin</label>
+  <input type="date" name="fecha2" required>
+  <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+
+
+
+
+<table class="table table-striped tabla_fechas_rango">
+  
+    <thead>
+      <tr>
+        <!--<th scope="col">id venta</th>-->
+        <th scope="col">fecha compra</th>
+        <th scope="col">cliente</th>
+        <th scope="col">producto</th>
+        <th scope="col">precio</th>
+        <th scope="col">cantidad</th>
+        <th scope="col">total</th>
+        
+        
+
+      </tr>
+    </thead>
+    <tbody>
+
+      {%for fechas in fechas%}
+
+    <tr>
+        <td>{{fechas.fecha_de_compra}}</td>
+        <td>{{fechas.nombre_cliente}}</td>
+        <td>{{fechas.producto}}</td>
+        <td>${{fechas.valor_publico}}</td>
+        <td>{{fechas.cantidad}}</td>
+        <td>${{fechas.total}}</td>
+        
+    </tr>
+
+    {%endfor%}
+
+      
+ 
+      
+    </tbody>
+    <td>
+
+      <h4><br>total<br/></h4>
+      <h2><br>${{total.0.total}}<br/></h2>
+      
+      
+      
+    </td>
+  </table>
+
+
+{%endblock%}

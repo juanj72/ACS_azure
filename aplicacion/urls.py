@@ -17,7 +17,8 @@ urlpatterns=[
     path('recibo/<int:factura>',views.recibo,name="recibo"),
     #path('cerrar_sesion',views.cerrar_sesion,name="cerrar_sesion"),
     path('anular',views.anulacion,name="anular"),
-    path('listado_productos_vent',views.total_productos,name="total_productos_vendidos")
+    path('listado_productos_vent',views.total_productos,name="total_productos_vendidos"),
+    path('rango_fechas',views.fechas_rango,name='rango_fechas')
     
         
     
