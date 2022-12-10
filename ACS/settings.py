@@ -100,7 +100,6 @@ DATABASES = {
 #         'NAME': 'acs_inventario',
 #         'USER':'root',
 #         'PASSWORD':'',
-#         #'HOST':'servidorelectiva2jara.mysql.database.azure.com',
 #         'PORT':'3306'
 #     }
 # }

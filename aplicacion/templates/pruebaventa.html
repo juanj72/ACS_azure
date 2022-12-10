@@ -2,6 +2,12 @@
 {%load crispy_forms_tags%}
 
 <body>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
     <div class="vista">
 
         <div class="tabla">
@@ -38,6 +44,16 @@
                     <div class="alert alert-danger" role="alert">
                       la cantidad supera el limite en stock
                     </div>
+
+                    <script>
+
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Verfique la cantidad en stock',
+                       
+                        })
+                    </script>
                      {%elif mensaje_agregado%}
                      <div class="alert alert-success" role="alert">
                         producto agregado con exito

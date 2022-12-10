@@ -1,5 +1,20 @@
 {%extends "index.html"%} {%block content%}
 
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#tabla_vis').DataTable();
+});
+</script>
+
+
+
+
 <div class="tabla_prod">
 
     <h2><b>Productos</b></h2>
@@ -57,7 +72,7 @@
     
 
 
-    <table class="table">
+    <table class="table" id="tabla_vis">
         <thead>
           <tr>
             <th scope="col">id</th>
@@ -65,6 +80,8 @@
            <!-- <th scope="col">valor neto</th>--> 
             <th scope="col">valor publico</th>
             <th scope="col">cantidad</th>
+            <th scope="col">editar</th>
+            <th scope="col">agregar_cant</th>
           </tr>
         </thead>
         <tbody>
@@ -76,7 +93,8 @@
             <td>${{prod.valor_publico}}</td>
             <td>{{prod.cantidad}}</td>
             <td><a class="btn btn-primary" href="{%url 'modal_editar' prod.id %}">Editar</a></td>
-            <td><a href="{%url 'eliminar' prod.id %}" class="btn btn-danger">eliminar</a> </td>
+            <!-- <td><a href="{%url 'eliminar' prod.id %}" class="btn btn-danger">eliminar</a> </td> -->
+            <td><a href="" class="btn btn-success">agregar cantidad</a> </td>
            
             
           </tr>
@@ -87,7 +105,7 @@
 
       </div>
       
-
+     
    
 
 
@@ -96,4 +114,9 @@
 
 
 
+
+
 {%endblock%}
+
+
+

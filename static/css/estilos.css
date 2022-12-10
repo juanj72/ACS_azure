@@ -164,7 +164,7 @@ a.selected{
 }
 .tabla_prod{
     width: 90%;
-    margin: 10% 10% 1px 8%;
+    margin: 10% 10% 5% 8%;
     color: #1783db;
 }
 
@@ -179,6 +179,11 @@ a.selected{
         width: 80px;
         left: -80px;
     }
+}
+
+.table{
+
+    margin-bottom: 20%;
 }
 
 

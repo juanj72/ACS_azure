@@ -52,7 +52,7 @@ def inicio(request):
 
         connection.commit()  # Enviamos la sentencia a la BD
         connection.close()
-        print(data)
+        #print(data)
 
         arr_report=[]
         arr_ventas=[]
@@ -463,7 +463,7 @@ def anulacion(request):
 
 
         # Ejecutar una linea SQL En este caso llamamos un procedimiento almacenado
-        cursor.execute('select distinct numero_factura from aplicacion_reportes')
+        cursor.execute('select distinct numero_factura from aplicacion_reportes where fecha_compra=curdate()')
         #total=total_fecha(fecha)
 
         columns = []  # Para guardar el nombre de las columnas
