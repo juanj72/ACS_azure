@@ -203,7 +203,7 @@ def ventasr(request):
      
      if formulario.is_valid:
          formulario.save()
-         return redirect('prueba_venta')  
+         return redirect('prueba_venta',0)  
 
   except: 
     error=True
@@ -212,8 +212,9 @@ def ventasr(request):
 
 
 @login_required
-def venta_registro(request):
+def venta_registro(request,id):
     #clientes=cliente.objects.all()
+    
     productos=models.producto.objects.all()
     formulario=Formulario_ventas(request.POST or None)
     mensaje_cantidad=False
@@ -227,6 +228,7 @@ def venta_registro(request):
     carro=None
     total=None
     factura=None
+    carrovalid=None
 
     if request.POST.get('idCliente') and request.POST.get('idProducto')and request.POST.get('cantidad') and request.POST.get('numero_factura') and int(request.POST['numero_factura']) not in arr_report:
         productos=models.producto.objects.get(id=request.POST['idProducto'])
@@ -247,22 +249,39 @@ def venta_registro(request):
             factura=request.POST['numero_factura']
         carro=carrito(request.POST['numero_factura'])
         total=total_carrito(request.POST['numero_factura'])
+        if len(carro)!=0:
+            
+          carrovalid=True
         
         if factura!=None:
             mensaje_agregado=True
     else:
         factura_repetida=True
+        carro=carrito(id)
+        total=total_carrito(id)
 
                 
 
-    return render(request,"pruebaventa.html",{"factura_repetida":factura_repetida,"formulario":formulario,"error_cantidad":mensaje_cantidad,"mensaje_agregado":mensaje_agregado,"carro":carro,"total":total,"factura_no":mensaje_agregado,"factura":factura})
+    return render(request,"pruebaventa.html",{"factura_repetida":factura_repetida,"formulario":formulario,"error_cantidad":mensaje_cantidad,"mensaje_agregado":mensaje_agregado,"carro":carro,"total":total,"factura_no":mensaje_agregado,"factura":factura,"valid_carro":carrovalid})
 
 
 
 def eliminar_venta(request,id):
+ vent=models.ventas.objects.get(id=id) 
+ vent.delete()
+ print(vent)
+ return redirect('prueba_venta',vent.numero_factura)
+
+
+def limpiar(request,id):
  vent=models.ventas.objects.filter(numero_factura=id) 
  vent.delete()
- return redirect('prueba_venta')
+ print(vent)
+ return redirect('prueba_venta',0)
+
+
+
+
 
 
 
@@ -516,6 +535,7 @@ def anulacion(request):
             print(request.POST['anular'])
             anular_venta(request.POST['anular'])
             mensaje_hecho=True
+            return redirect('anular')
     
 
         return render(request,"anular.html",{"recibo":data,"exito":mensaje_hecho})
@@ -527,7 +547,7 @@ def anular_venta(numero_factura):
     anular_recibo(numero_factura)
     
     
-    pass 
+    pass
 
 
 def anular_recibo(numero_factura):

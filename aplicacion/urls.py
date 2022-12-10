@@ -11,7 +11,7 @@ urlpatterns=[
     path('editar_pro/<int:id>',views.editar,name="modal_editar"),
     path('venta',views.ventasr,name="venta"),
     path('reportes',views.reportes,name="reportes"),
-    path('prueba_venta',views.venta_registro, name="prueba_venta"),
+    path('prueba_venta/<int:id>',views.venta_registro, name="prueba_venta"),
     path('reporfecha',views.fechas,name="fechas"),
     path('eliminar_venta/<int:id>',views.eliminar_venta,name="eliminar_venta"),
     path('recibo/<int:factura>',views.recibo,name="recibo"),
@@ -19,7 +19,8 @@ urlpatterns=[
     path('anular',views.anulacion,name="anular"),
     path('listado_productos_vent',views.total_productos,name="total_productos_vendidos"),
     path('rango_fechas',views.fechas_rango,name='rango_fechas'),
-    path('agregar_cantidad/<int:id>',views.agregar_cantidad,name='agregar_cantidad')
+    path('agregar_cantidad/<int:id>',views.agregar_cantidad,name='agregar_cantidad'),
+    path('eliminar_total/<int:id>',views.limpiar,name="limpiar")
     
         
     

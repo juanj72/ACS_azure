@@ -21,16 +21,24 @@
             <td>{{venta.numero_factura}}</td>
             <td>$ <B>{{venta.total}}</B> </td>
             
-            <td><a href="{% url 'eliminar_venta' venta.numero_factura %}" class="btn btn-danger">limpiar</a></td>
+            <td><a href="{% url 'eliminar_venta' venta.ventas %}" class="btn btn-danger">eliminar</a></td>
             
 
           </tr>
-
-          {%endfor%}
-          
          
+          
+          {%endfor%}
+
+          {%if valid_carro %}
+          <a href="{% url 'limpiar' carro.0.numero_factura %}" class="btn btn-warning">limpiar</a>
+          {%else%}
+          <a href="{% url 'limpiar' 0 %}" class="btn btn-warning">limpiar</a>
+          {%endif%}
+          
+          
         </tbody>
       </table>
+     
       <h3>ACUMULADO: $<b>{{total.0.total}}</b></h3>
       
 

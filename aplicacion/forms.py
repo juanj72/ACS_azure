@@ -18,6 +18,8 @@ class Formulario_clientes(forms.ModelForm):
 
 
 class Formulario_ventas(forms.ModelForm):
+    
+
     class Meta:
         model=ventas
         fields='__all__'
