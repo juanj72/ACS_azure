@@ -167,6 +167,30 @@ def editar(request, id):
     return render(request,"modaleditarpro.html",{'formulario':formulario})
 
 
+
+
+def agregar_cantidad(request, id):
+    err=False
+    cantidades=None
+    productopy=models.producto.objects.get(id=id)
+    if request.POST.get('cantidad'):
+        # print(int(request.POST['cantidad'])+productopy.cantidad)
+        cantidades=int(request.POST['cantidad'])+productopy.cantidad
+        print(type(productopy.cantidad))
+        productopy.cantidad=cantidades
+        productopy.save()
+        err=True
+
+
+
+
+    return render(request,'agregar_cantidad.html',{"producto":productopy,"valid":err})
+
+
+
+
+
+
 @login_required
 def ventasr(request):
   try:
