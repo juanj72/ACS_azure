@@ -92,7 +92,11 @@
             <!--<td>${{prod.valor_neto}}</td>-->
             <td>${{prod.valor_publico}}</td>
             <td>{{prod.cantidad}}</td>
-            <td><a class="btn btn-primary" href="{%url 'modal_editar' prod.id %}">Editar</a></td>
+            <td>
+              
+              <!-- <a class="btn btn-primary" href="{%url 'modal_editar' prod.id %}">Editar</a> -->
+            
+            </td>
             <!-- <td><a href="{%url 'eliminar' prod.id %}" class="btn btn-danger">eliminar</a> </td> -->
             <td><a href="{% url 'agregar_cantidad' prod.id %}" class="btn btn-success">agregar cantidad</a> </td>
            
