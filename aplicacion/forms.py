@@ -8,6 +8,10 @@ class Formularioproducto(forms.ModelForm):
         model = producto
         fields='__all__'
 
+class FormularioEditarPro(forms.ModelForm):
+    class Meta:
+        model=producto
+        fields=['Nombre_producto','valor_publico']
 
 
 class Formulario_clientes(forms.ModelForm):

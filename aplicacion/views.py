@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from aplicacion import models
-from aplicacion.forms import Formulario_clientes, Formulario_ventas, Formularioproducto
+from aplicacion.forms import *
 from django.db import connection
 from datetime import date
 from django.contrib.auth.decorators import login_required
@@ -160,7 +160,7 @@ def eliminarpro(request,id):
 @login_required
 def editar(request, id):
     productopy=models.producto.objects.get(id=id)
-    formulario=Formularioproducto(request.POST or None, instance=productopy)
+    formulario=FormularioEditarPro(request.POST or None, instance=productopy)
     if formulario.is_valid and request.method=='POST':
         formulario.save()
         return redirect('ver_producto')
@@ -230,7 +230,7 @@ def venta_registro(request,id):
     factura=None
     carrovalid=None
 
-    if request.POST.get('idCliente') and request.POST.get('idProducto')and request.POST.get('cantidad') and request.POST.get('numero_factura') and int(request.POST['numero_factura']) not in arr_report:
+    if request.POST.get('idCliente') and request.POST.get('idProducto')and request.POST.get('cantidad') and request.POST.get('numero_factura') not in arr_report:
         productos=models.producto.objects.get(id=request.POST['idProducto'])
         
         

@@ -83,26 +83,26 @@ WSGI_APPLICATION = 'ACS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-     'default': {
-           'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'acs_inventario',
-        'USER':'electiva2db',
-        'PASSWORD':'Azure2022A*',
-        'HOST':'servidorelectiva2jara.mysql.database.azure.com',
-        'PORT':'3306'
-     }
- }
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
+#      'default': {
+#            'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'acs_inventario',
-#         'USER':'root',
-#         'PASSWORD':'',
+#         'USER':'electiva2db',
+#         'PASSWORD':'Azure2022A*',
+#         'HOST':'servidorelectiva2jara.mysql.database.azure.com',
 #         'PORT':'3306'
-#     }
-# }
+#      }
+#  }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'acs_inventario',
+        'USER':'root',
+        'PASSWORD':'',
+        'PORT':'3306'
+    }
+}
 
 
 # Password validation
@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-us'
 
 TIME_ZONE = 'UTC'
 
