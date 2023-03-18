@@ -230,7 +230,7 @@ def venta_registro(request,id):
     factura=None
     carrovalid=None
 
-    if request.POST.get('idCliente') and request.POST.get('idProducto')and request.POST.get('cantidad') and request.POST.get('numero_factura') not in arr_report:
+    if request.POST.get('idCliente') and request.POST.get('idProducto')and request.POST.get('cantidad') and request.POST.get('numero_factura') and int(request.POST['numero_factura']) not in arr_report:
         productos=models.producto.objects.get(id=request.POST['idProducto'])
         
         

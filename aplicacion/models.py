@@ -8,7 +8,7 @@ class producto(models.Model):
     valor_publico=models.IntegerField()
     cantidad=models.IntegerField()
     def __str__(self):
-        return str(self.Nombre_producto)+'  --PRECIO-- $'+str(self.valor_publico)
+        return str(self.id)+'>> '+str(self.Nombre_producto)+'  --PRECIO-- $'+str(self.valor_publico)
     
 
 

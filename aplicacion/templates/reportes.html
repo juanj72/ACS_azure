@@ -1,6 +1,6 @@
 {%extends "index.html"%} {%block content%}
 
-
+{% load humanize %}
 
 
 
@@ -36,9 +36,9 @@
             <td>{{reporte.Producto}}</td>
             <td>{{reporte.cantidad}}</td>
             <td>{{reporte.fecha_compra}}</td>
-            <td>{{reporte.valor}}</td>
+            <td>$ {{reporte.valor | intcomma }}</td>
             <td>{{reporte.factura}}</td>
-            <td>{{reporte.total}}</td>
+            <td>$ {{reporte.total | intcomma }}</td>
             
           </tr>
 

@@ -1,6 +1,6 @@
 {%extends "index.html"%} {%block content%}
 
-
+{% load humanize %}
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
@@ -90,7 +90,7 @@
             <th scope="row">{{prod.id}}</th>
             <td>{{prod.Nombre_producto}}</td>
             <!--<td>${{prod.valor_neto}}</td>-->
-            <td>${{prod.valor_publico}}</td>
+            <td>${{prod.valor_publico | intcomma }}</td>
             <td>{{prod.cantidad}}</td>
             <td>
               

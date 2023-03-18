@@ -1,5 +1,5 @@
 {% extends "index.html"%}{%block content%}
-
+ {% load humanize %}
 <style>
 
     .tabla_fechas_rango{
@@ -61,9 +61,9 @@
         <td>{{fechas.fecha_de_compra}}</td>
         <td>{{fechas.nombre_cliente}}</td>
         <td>{{fechas.producto}}</td>
-        <td>${{fechas.valor_publico}}</td>
+        <td>$ {{fechas.valor_publico | intcomma }}</td>
         <td>{{fechas.cantidad}}</td>
-        <td>${{fechas.total}}</td>
+        <td>$ {{fechas.total | intcomma }}</td>
         
     </tr>
 
@@ -76,7 +76,7 @@
     <td>
 
       <h4><br>total<br/></h4>
-      <h2><br>${{total.0.total}}<br/></h2>
+      <h2><br>$ {{total.0.total | intcomma }}<br/></h2>
       
       
       
