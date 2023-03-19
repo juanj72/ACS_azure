@@ -26,10 +26,10 @@ SECRET_KEY = 'django-insecure-i+uppdw_r%_dpnba_q57@8e1gn!7^%as!2=cs_93jf9=mn_6xj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['prueba61.azurewebsites.net','*']
+ALLOWED_HOSTS = ['audicomsystem.azurewebsites.net','*']
 #ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://prueba61.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['https://audicomsystem.azurewebsites.net']
 
 STATICFILES_DIRS=(
     os.path.join(BASE_DIR,'static'),
@@ -84,26 +84,26 @@ WSGI_APPLICATION = 'ACS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-     'default': {
-           'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'acs_inventario',
-        'USER':'electiva2db',
-        'PASSWORD':'Azure2022A*',
-        'HOST':'servidorelectiva2jara.mysql.database.azure.com',
-        'PORT':'3306'
-     }
- }
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
+#      'default': {
+#            'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'acs_inventario',
-#         'USER':'root',
-#         'PASSWORD':'',
+#         'USER':'electiva2db',
+#         'PASSWORD':'Azure2022A*',
+#         'HOST':'servidorelectiva2jara.mysql.database.azure.com',
 #         'PORT':'3306'
-#     }
-# }
+#      }
+#  }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'acs_inventario',
+        'USER':'root',
+        'PASSWORD':'',
+        'PORT':'3306'
+    }
+}
 
 
 # Password validation
