@@ -19,9 +19,20 @@
 
     <h2><b>Productos</b></h2>
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  <b>+</b> agregar producto
-</button>
+
+
+    {%if user.username == 'acsinv' %}
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <b>+</b> agregar producto
+    </button>
+
+
+    {% endif%}
+
+
+  
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -94,9 +105,14 @@
             <td>{{prod.cantidad}}</td>
             <td>
               
+              {%if user.username == 'acsinv' %}
               <a class="btn btn-primary" href="{%url 'modal_editar' prod.id %}">Editar</a>
+      
+              {% endif%}
             
             </td>
+          
+
             <!-- <td><a href="{%url 'eliminar' prod.id %}" class="btn btn-danger">eliminar</a> </td> -->
             <td><a href="{% url 'agregar_cantidad' prod.id %}" class="btn btn-success">agregar cantidad</a> </td>
            
