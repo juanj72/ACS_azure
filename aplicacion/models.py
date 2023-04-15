@@ -34,5 +34,6 @@ class ventas(models.Model):
 
 class reportes (models.Model):
     numero_factura=models.IntegerField(null=True)
+    fecha_compra = models.DateField(auto_now=True)
     #def __str__(self):
         #return self.numero_factura       
