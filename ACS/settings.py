@@ -26,10 +26,10 @@ SECRET_KEY = 'django-insecure-i+uppdw_r%_dpnba_q57@8e1gn!7^%as!2=cs_93jf9=mn_6xj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['audicomsystem.azurewebsites.net','*']
+ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://audicomsystem.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['https://acsinv.azurewebsites.net']
 
 STATICFILES_DIRS=(
     os.path.join(BASE_DIR,'static'),
@@ -88,9 +88,9 @@ DATABASES = {
      'default': {
            'ENGINE': 'django.db.backends.mysql',
         'NAME': 'acs_inventario',
-        'USER':'electiva2db',
-        'PASSWORD':'Azure2022A*',
-        'HOST':'servidorelectiva2jara.mysql.database.azure.com',
+        'USER':'jaraserver',
+        'PASSWORD':'Inmo2023*$',
+        'HOST':'serverjarainmobiliaria.mysql.database.azure.com',
         'PORT':'3306'
      }
  }
